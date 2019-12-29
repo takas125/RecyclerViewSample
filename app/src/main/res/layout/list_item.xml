@@ -5,29 +5,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp">
+    android:paddingBottom="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/main_contents_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:onClick="setOnClickLitener"
+            android:orientation="vertical"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/item_title"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 tools:text="titleです" />
 
             <TextView
                 android:id="@+id/item_detail"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 tools:text="詳細ですよ詳細ですよ詳細ですよ詳細ですよ詳細ですよ" />
 
@@ -35,9 +45,43 @@
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/colorPrimary"
-                app:layout_constraintTop_toTopOf="@id/item_detail" />
+                app:layout_constraintTop_toBottomOf="@id/main_contents_area" />
+
+        </LinearLayout>
+
+        <!--  including area  -->
+        <LinearLayout
+            android:id="@+id/detail_contents_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/main_contents_area"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/include_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/colorPrimary"
+                tools:text="中のタイトルですよ" />
+
+            <TextView
+                android:id="@+id/include_item_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/colorPrimary"
+                tools:text="中身ですよ中身ですよ中身ですよ中身ですよ中身ですよ中身ですよ" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/detail_contents_area" />
 
         </LinearLayout>
 

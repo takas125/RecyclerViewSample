@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.takas125.recyclerviewsample.model.DetailItemModel
 import com.takas125.recyclerviewsample.model.ItemModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,9 +38,16 @@ class MainActivity : AppCompatActivity() {
     private fun createData (): List<ItemModel> {
         val dataList = mutableListOf<ItemModel>()
         for (i in 0..49) {
+
+            val detailData = DetailItemModel(
+                "中身のタイトルだよ",
+                "中身の詳細だよ"
+            )
+
             val data = ItemModel(
                 "タイトル" + i + "だよ",
-                "詳細" + i  + "個目だよ"
+                "詳細" + i  + "個目だよ",
+                    detailData
                 )
                 dataList.add(data)
             }
