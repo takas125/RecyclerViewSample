@@ -1,4 +1,4 @@
-package com.takas125.recyclerviewsample
+package com.takas125.recyclerviewsample.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.takas125.recyclerviewsample.R
 import com.takas125.recyclerviewsample.model.ItemModel
 import kotlinx.android.synthetic.main.list_item.view.*
 
