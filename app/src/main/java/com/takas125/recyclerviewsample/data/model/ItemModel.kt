@@ -1,4 +1,4 @@
-package com.takas125.recyclerviewsample.model
+package com.takas125.recyclerviewsample.data.model
 
 data class ItemModel (
     var title: String,

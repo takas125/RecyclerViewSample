@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.takas125.recyclerviewsample.adapter.RecyclerViewAdapter
-import com.takas125.recyclerviewsample.model.DetailItemModel
-import com.takas125.recyclerviewsample.model.ItemModel
+import com.takas125.recyclerviewsample.data.model.DetailItemModel
+import com.takas125.recyclerviewsample.data.model.ItemModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

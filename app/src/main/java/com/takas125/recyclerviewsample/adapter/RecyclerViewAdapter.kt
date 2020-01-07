@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.takas125.recyclerviewsample.R
-import com.takas125.recyclerviewsample.model.ItemModel
+import com.takas125.recyclerviewsample.data.model.ItemModel
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class RecyclerViewAdapter (private val itemList: List<ItemModel>)
