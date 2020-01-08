@@ -1,8 +1,8 @@
 package com.takas125.recyclerviewsample.data.model
 
-data class ItemModel (
+data class ParentModel (
     var title: String,
     var detail: String,
-    val detailItem: DetailItemModel,
+    val childList: List<ChildModel>,
     var expanded: Boolean = false
 )

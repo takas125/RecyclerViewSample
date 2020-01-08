@@ -51,38 +51,14 @@
         </LinearLayout>
 
         <!--  including area  -->
-        <LinearLayout
-            android:id="@+id/detail_contents_area"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/childRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/main_contents_area"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-            <TextView
-                android:id="@+id/include_item_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:textColor="@color/colorPrimary"
-                tools:text="中のタイトルですよ" />
-
-            <TextView
-                android:id="@+id/include_item_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:textColor="@color/colorPrimary"
-                tools:text="中身ですよ中身ですよ中身ですよ中身ですよ中身ですよ中身ですよ" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/detail_contents_area" />
-
-        </LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

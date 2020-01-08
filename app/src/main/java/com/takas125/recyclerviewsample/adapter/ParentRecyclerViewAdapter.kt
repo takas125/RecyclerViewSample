@@ -8,43 +8,33 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.takas125.recyclerviewsample.R
-import com.takas125.recyclerviewsample.data.model.ItemModel
-import kotlinx.android.synthetic.main.list_item.view.*
+import com.takas125.recyclerviewsample.data.model.ParentModel
+import kotlinx.android.synthetic.main.parent_list_item.view.*
 
-class RecyclerViewAdapter (private val itemList: List<ItemModel>)
-    : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class ParentRecyclerViewAdapter (private val parentList: List<ParentModel>)
+    : RecyclerView.Adapter<ParentRecyclerViewAdapter.ViewHolder>() {
 
     // ここで文字通り表示するお情報を保持している
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleView: TextView
         val detailView: TextView
-        val includeTitleView: TextView
-        val includeDetailView: TextView
         val mainContentsArea: LinearLayout
-        val includeContentsArea: LinearLayout
+        val childRecyclerView: RecyclerView
 
         init {
-            view.setOnClickListener{
-                Log.d(TAG, "Element $adapterPosition clicked.")
-            }
             titleView = itemView.item_title
             detailView = itemView.item_detail
-            includeTitleView = itemView.include_item_title
-            includeDetailView = itemView.include_item_detail
             mainContentsArea = itemView.main_contents_area
-            includeContentsArea = itemView.detail_contents_area
+            childRecyclerView = itemView.childRecyclerView
         }
-
-//        fun bind (item: ItemModel) {
-//
-//        }
-
     }
+
+    val recyclerViewPool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view.
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.list_item, viewGroup, false)
+            .inflate(R.layout.parent_list_item, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -53,27 +43,29 @@ class RecyclerViewAdapter (private val itemList: List<ItemModel>)
     // ここでViewと紐づけている
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         Log.d(TAG, "Element $position set.")
-        val item: ItemModel = itemList[position]
+        val parent: ParentModel = parentList[position]
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.titleView.text = item.title
-        viewHolder.detailView.text = item.detail
-        viewHolder.includeTitleView.text = item.detailItem.title
-        viewHolder.includeDetailView.text = item.detailItem.detail
+        viewHolder.titleView.text = parent.title
+        viewHolder.detailView.text = parent.detail
+        viewHolder.childRecyclerView.apply {
+            adapter = ChildRecyclerViewAdapter(parent.childList)
+            setRecycledViewPool(recyclerViewPool)
+            visibility = if(parent.expanded) View.VISIBLE else View.GONE
+        }
 
         viewHolder.mainContentsArea.setOnClickListener{
-            val isExpand: Boolean = item.expanded
-            item.expanded = !isExpand
+            val isExpand: Boolean = parent.expanded
+            parent.expanded = !isExpand
             notifyItemChanged(position)
         }
-        viewHolder.includeContentsArea.visibility = if(item.expanded) View.VISIBLE else View.GONE
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = itemList.size
+    override fun getItemCount() = parentList.size
 
     companion object {
-        private val TAG = "RecyclerViewAdapter"
+        private val TAG = "ParentRecyclerViewAdapter"
     }
 }

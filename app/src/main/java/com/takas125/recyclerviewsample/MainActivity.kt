@@ -7,10 +7,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.takas125.recyclerviewsample.adapter.RecyclerViewAdapter
-import com.takas125.recyclerviewsample.data.model.DetailItemModel
-import com.takas125.recyclerviewsample.data.model.ItemModel
+import com.takas125.recyclerviewsample.adapter.ParentRecyclerViewAdapter
+import com.takas125.recyclerviewsample.data.model.ParentModel
+import com.takas125.recyclerviewsample.factory.ParentDataFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,11 +24,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val itemList = createData()
+        val parentsCount = Random.nextInt(10,100)
+        val parentItemList = ParentDataFactory.getParents(parentsCount)
         viewManager = LinearLayoutManager(this)
-        viewAdapter = RecyclerViewAdapter(itemList)
-        spinnerItems = createSpinnerData(itemList)
+        viewAdapter = ParentRecyclerViewAdapter(parentItemList)
+        spinnerItems = createSpinnerData(parentItemList)
 
         val sppinerAdapter = ArrayAdapter(
             applicationContext,
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         jump_spinner.adapter = sppinerAdapter
 
-        recyclerView = this.itemRecyclerView.apply {
+        recyclerView = this.parentRecyclerView.apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         jump_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (++callCount > 1) {
-                    itemList[position].expanded = true
+                    parentItemList[position].expanded = true
                     recyclerView.scrollToPosition(position)
                     viewAdapter.notifyItemChanged(position)
                 }
@@ -66,26 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createData (): List<ItemModel> {
-        val dataList = mutableListOf<ItemModel>()
-        for (i in 0..49) {
-
-            val detailData = DetailItemModel(
-                "中身のタイトルだよ",
-                "中身の詳細だよ"
-            )
-
-            val data = ItemModel(
-                "タイトル" + i + "だよ",
-                "詳細" + i  + "個目だよ",
-                    detailData
-                )
-                dataList.add(data)
-            }
-        return dataList
-    }
-
-    private fun createSpinnerData (list: List<ItemModel>): MutableList<String> {
+    private fun createSpinnerData (list: List<ParentModel>): MutableList<String> {
         var mutableList: MutableList<String> = mutableListOf()
         list.forEach {
             mutableList.add(it.title)
