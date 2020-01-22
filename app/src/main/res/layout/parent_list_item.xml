@@ -40,6 +40,16 @@
                 android:layout_weight="0.5"
                 tools:text="詳細ですよ詳細ですよ詳細ですよ詳細ですよ詳細ですよ" />
 
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnShowMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/down_arrow"
+                android:layout_gravity="end"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="fitXY" />
+
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"

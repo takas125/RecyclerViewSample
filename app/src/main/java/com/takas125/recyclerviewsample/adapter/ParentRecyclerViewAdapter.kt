@@ -1,5 +1,6 @@
 package com.takas125.recyclerviewsample.adapter
 
+import android.animation.AnimatorInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +60,9 @@ class ParentRecyclerViewAdapter (private val parentList: List<ParentModel>)
             val isExpand: Boolean = parent.expanded
             parent.expanded = !isExpand
             notifyItemChanged(position)
+            AnimatorInflater.loadAnimator(it.context, R.animator.half_rotate_to_180).apply {
+                setTarget(it.btnShowMore)
+            }.start()
         }
     }
 
